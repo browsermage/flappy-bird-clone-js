@@ -1,11 +1,11 @@
+import { PipeManager } from "@scripts/pipeManagers.js"
 import { GameObject } from "@scripts/gameObject.js"
-import { PipePair } from "@scripts/pipePair.js"
 import { input } from "@scripts/input.js"
 import { time } from "@scripts/time.js"
 import { Bird } from "@scripts/bird.js"
 
 const canvas = document.createElement("canvas")
-export const ctx = canvas.getContext("2d")
+const ctx = canvas.getContext("2d")
 
 document.body.appendChild(canvas)
 
@@ -21,26 +21,15 @@ document.querySelectorAll("[data-asset]")
 
 // creating our gameObjects from the fetched assets
 const bird = new Bird(assets.get("bird"))
-const pipePair = new PipePair(assets.get("pipe"))
 const background = new GameObject(assets.get("background"))
 const ground = new GameObject(assets.get("ground"))
+const pipeManager = new PipeManager()
 
 // setting up starting position
 ground.position.addPosition(0, 400)
 bird.position.addPosition(124, 240)
-pipePair.position.addPosition(300, 240)
 
-// logic for spawning pipes
-let pipePairs = []
-let spawnRate = 0
-
-// nu börjar det bli grötigt
-function spawnPipes() {
-    const len = pipePairs.push(new PipePair(assets.get("pipe")))
-    pipePairs[len - 1].position.addPosition(300, 240)
-}
-
-spawnPipes()
+pipeManager.start()
 
 function animate(unscaledTime = 0) {
 
@@ -58,21 +47,13 @@ function animate(unscaledTime = 0) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // pipe spawner
-    spawnRate += time.deltaTime
-
-    if (spawnRate > 2) {
-        spawnPipes()
-        spawnRate = 0
-    }
-
     // update
-    pipePairs.forEach(pipePair => pipePair.update())
+    pipeManager.update()
     bird.update()
 
     // draw
     background.draw()
-    pipePairs.forEach(pipePair => pipePair.draw())
+    pipeManager.draw()
     ground.draw()
     bird.draw()
 
@@ -83,3 +64,5 @@ function animate(unscaledTime = 0) {
 }
 
 requestAnimationFrame(animate)
+
+export { ctx, assets }
