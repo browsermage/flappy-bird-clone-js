@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <script type="importmap">
+        {
+          "imports": {
+            "@scripts/": "../../assets/scripts/",
+            "@core": "../../game.js"
+          }
+        }
+    </script>
+</head>
+<body>
+    <!-- Assets -->
+    <style>
+        *[data-asset] {
+            display: none;
+        }
+    </style>
+    
+    <img data-asset="bird" src="./assets/images/yellowbird-midflap.png">
+    <img data-asset="pipe" src="./assets/images/pipe-green.png">
+    <img data-asset="background" src="./assets/images/background-day.png">
+    <img data-asset="ground" src="./assets/images/ground.png">
+
+    <audio data-asset="hit" src="./assets/sounds/hit.wav"></audio>
+    <audio data-asset="point" src="./assets/sounds/point.wav"></audio>
+
+    <script type="module" src="./game.js"></script>
+</body>
+</html>
