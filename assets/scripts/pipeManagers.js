@@ -24,19 +24,33 @@ export class PipeManager {
         }
 
         // update all pipe positions
-        this.pipes.forEach(pipe => pipe.position.x -= this.moveSpeed * time.deltaTime)
+        this.pipes.forEach(pipePair => {
+            pipePair.pipeTop.position.x -= this.moveSpeed * time.deltaTime
+            pipePair.pipeBottom.position.x -= this.moveSpeed * time.deltaTime
+        })
     }
     
     draw() {
+        // vänd ena spriten
+
         // draw all pipes
-        this.pipes.forEach(pipe => pipe.draw())
+        this.pipes.forEach(pipePair => {
+            pipePair.pipeTop.draw()
+            pipePair.pipeBottom.draw()
+        })
     }
 
     createPipe() {
-        const pipe = new Pipe(assets.get("pipe"))
+        const pipeTop = new Pipe(assets.get("pipe-top"))
+        const pipeBottom = new Pipe(assets.get("pipe-bottom"))
 
-        pipe.position.addPosition(300, 240)
+        // calculate pipe positionen
+        pipeTop.position.addPosition(300, -110)
+        pipeBottom.position.addPosition(300, 240)
 
-        this.pipes.push(pipe)
+        this.pipes.push({
+            pipeTop,
+            pipeBottom
+        })
     }
 }

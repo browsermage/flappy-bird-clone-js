@@ -7,11 +7,14 @@ export class GameObject {
     sprite
 
     constructor(sprite) {
-        this.sprite = sprite
+        this.sprite = {
+            texture: sprite,
+            flipped: false
+        }
     }
 
     draw() {
-        ctx.drawImage(this.sprite, Math.round(this.position.x), Math.round(this.position.y))
+        ctx.drawImage(this.sprite.texture, Math.round(this.position.x), Math.round(this.position.y))
     }
 
     update() {}
