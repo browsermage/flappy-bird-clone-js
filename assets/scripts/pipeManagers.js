@@ -1,6 +1,7 @@
 import { assets } from "@core";
 import { Pipe } from "@scripts/pipe.js";
 import { time } from "@scripts/time.js";
+import { randomBetween } from "@scripts/math.js";
 
 export class PipeManager {
 
@@ -16,7 +17,7 @@ export class PipeManager {
         // pipe spawner
         this.spawnTimer += time.deltaTime
 
-        if (this.spawnTimer > 2) {
+        if (this.spawnTimer > 2.5) {
             
             this.createPipe()
 
@@ -31,8 +32,6 @@ export class PipeManager {
     }
     
     draw() {
-        // vänd ena spriten
-
         // draw all pipes
         this.pipes.forEach(pipePair => {
             pipePair.pipeTop.draw()
@@ -44,9 +43,11 @@ export class PipeManager {
         const pipeTop = new Pipe(assets.get("pipe-top"))
         const pipeBottom = new Pipe(assets.get("pipe-bottom"))
 
+        const areaBetweenPipes = randomBetween(60, 220)
+
         // calculate pipe positionen
-        pipeTop.position.addPosition(300, -110)
-        pipeBottom.position.addPosition(300, 240)
+        pipeTop.position.addPosition(300, areaBetweenPipes - pipeTop.sprite.height)
+        pipeBottom.position.addPosition(300, areaBetweenPipes + 150)
 
         this.pipes.push({
             pipeTop,
