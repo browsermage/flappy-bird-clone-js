@@ -17,4 +17,4 @@ export class Vector2 {
  */
 export function randomBetween(minInclusive = 0, maxInclusive = 1) {
     return Math.floor(Math.random() * (maxInclusive - minInclusive + 1) + minInclusive)
- }
+}

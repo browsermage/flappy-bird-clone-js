@@ -14,10 +14,12 @@ export class PipeManager {
     }
 
     update() {
-        // pipe spawner
+        
+        const timeBetweenSpawns = 2.5
+
         this.spawnTimer += time.deltaTime
 
-        if (this.spawnTimer > 2.5) {
+        if (this.spawnTimer > timeBetweenSpawns) {
             
             this.createPipe()
 
