@@ -8,7 +8,9 @@ const canvas = document.createElement("canvas")
 canvas.style.imageRendering = "pixelated"
 const ctx = canvas.getContext("2d")
 
-document.body.appendChild(canvas)
+const gameWrapper = document.querySelector("#game-wrapper")
+
+gameWrapper.appendChild(canvas)
 
 // 9:16
 canvas.width = 288
