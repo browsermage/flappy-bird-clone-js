@@ -5,7 +5,9 @@ import { time } from "@scripts/time.js"
 import { Bird } from "@scripts/bird.js"
 
 const canvas = document.createElement("canvas")
+
 canvas.style.imageRendering = "pixelated"
+
 const ctx = canvas.getContext("2d")
 
 const gameWrapper = document.querySelector("#game-wrapper")
@@ -81,28 +83,30 @@ function animate(unscaledTime = 0) {
 
     background.draw()
     pipeManager.draw()
-
+    bird.update()
     if (state === states.running) {
+
+        function gameover() {
+            bird.velocity.y = -1.5
+            bird.dead = true
+            state = states.score
+        }
+
         // update
         pipeManager.update()
-        bird.update()
 
         // check collision on every pipe pair with the bird
         pipeManager.pipes.forEach(pipePair => {
             if (bird.collides(pipePair.pipeTop) || bird.collides(pipePair.pipeBottom)) {
-                state = states.score
+                gameover() 
             } 
         })
 
         // check if we have a collsion with the ground
-        if (bird.collides(ground)) {
-            state = states.score
-        }
+        if (bird.collides(ground)) gameover() 
 
         // if the bird goes offscreen
-        if (bird.position.y < 0) {
-            state = states.score
-        }
+        if (bird.position.y < 0) gameover() 
 
         strokedAndFilledText("0", canvas.width / 2, 60)
     }
@@ -116,6 +120,8 @@ function animate(unscaledTime = 0) {
     }
 
     if (state === states.score) {
+        
+        
         // play death sound
         // make birdy drop
         // show score
@@ -142,5 +148,5 @@ function animate(unscaledTime = 0) {
 }
 
 requestAnimationFrame(animate)
-console.log(ctx)
+
 export { ctx, assets }

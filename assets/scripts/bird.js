@@ -2,21 +2,29 @@ import { GameObject } from "@scripts/gameObject.js"
 import { Vector2 } from "@scripts/math.js"
 import { input } from "@scripts/input.js"
 import { time } from "@scripts/time.js"
+import { assets } from "@core"
 
 export class Bird extends GameObject {
-    jumpForce = -3
+    jumpForce = -1.5
     velocity = new Vector2(0,0)
+    dead = false
 
     update() {
 
-        if (input.getKeyPressed("KeyW")) {
+        if (input.getKeyPressed("KeyF") && !this.dead) {
             this.velocity.y = this.jumpForce
         } 
 
-        const gravity = 8
+        const gravity = 3
 
         this.velocity.y = this.velocity.y + gravity * time.deltaTime
         this.position.addPosition(this.velocity.x, this.velocity.y)
+
+        if (this.dead) {
+            this.sprite = assets.get("bird-hurt")
+        } else {
+            this.sprite = (this.velocity.y < 0) ? assets.get("bird-flap"): assets.get("bird")
+        }
     }
 
     // Axis-aligned bounding box testing (AABB collision test)
