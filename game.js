@@ -15,20 +15,17 @@ canvas.width = 288
 canvas.height = 512
 
 // set text 
-ctx.font = "36px Retro"
-ctx.textAlign = "left"
+ctx.font = "28px Retro"
+ctx.textAlign = "center"
 
 function strokedAndFilledText(text = "", x = 0, y = 0) {
-    ctx.lineWidth = 12
-    ctx.strokeStyle = "#eafddb";
+    ctx.strokeText(text, x, y + 4)
+    ctx.lineWidth = 6
 
-    ctx.strokeText(text, x, y)
-    ctx.lineWidth = 8
-
-    ctx.strokeStyle = "#523747";
+    ctx.strokeStyle = "#222034";
     ctx.strokeText(text, x, y)
     
-    ctx.fillStyle = "#fff"
+    ctx.fillStyle = "white"
     ctx.fillText(text, x, y)
 }
 
@@ -83,7 +80,6 @@ function animate(unscaledTime = 0) {
     background.draw()
     pipeManager.draw()
 
-
     if (state === states.running) {
         // update
         pipeManager.update()
@@ -106,7 +102,7 @@ function animate(unscaledTime = 0) {
             state = states.score
         }
 
-        strokedAndFilledText("45", 16, 60)
+        strokedAndFilledText("0", canvas.width / 2, 60)
     }
 
     if (state === states.countdown) {
@@ -121,7 +117,7 @@ function animate(unscaledTime = 0) {
         // play death sound
         // make birdy drop
         // show score
-        strokedAndFilledText("45", 16, 60)
+        strokedAndFilledText("Tap", canvas.width / 2, 60)
         
         
     }
