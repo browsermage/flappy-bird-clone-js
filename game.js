@@ -1,38 +1,49 @@
+import { ParallaxBackground } from "@scripts/parallaxBackground.js"
 import { PipeManager } from "@scripts/pipeManagers.js"
-import { GameObject } from "@scripts/gameObject.js"
 import { input } from "@scripts/input.js"
 import { time } from "@scripts/time.js"
 import { Bird } from "@scripts/bird.js"
+import { Vector2 } from "@scripts/math.js"
 
 const canvas = document.createElement("canvas")
-
-canvas.style.imageRendering = "pixelated"
-
 const ctx = canvas.getContext("2d")
-
 const gameWrapper = document.querySelector("#game-wrapper")
 
 gameWrapper.appendChild(canvas)
 
-// 9:16
-canvas.width = 288
-canvas.height = 512
+function resize() {
+    const dpr = window.devicePixelRatio
 
-// set text 
-ctx.font = "28px Retro"
-ctx.textAlign = "center"
+    canvas.style.width = "288px"
+    canvas.style.height = "512px"
 
-function strokedAndFilledText(text = "", x = 0, y = 0) {
+    canvas.width = 288 * dpr
+    canvas.height = 512 * dpr
+    
+    ctx.scale(dpr,dpr)
+
+    canvas.style.imageRendering = "pixelated"
+    ctx.imageSmoothingEnabled = false
+
+    // set text 
+    ctx.font = "28px Retro"
+    ctx.textAlign = "center"
+}
+
+resize()
+
+window.addEventListener("resize", resize, false)
+
+function strokedAndFilledText(text = "", x = 0, y = 0, color = "white") {
     ctx.strokeText(text, x, y + 4)
     ctx.lineWidth = 6
 
     ctx.strokeStyle = "#222034";
     ctx.strokeText(text, x, y)
     
-    ctx.fillStyle = "white"
+    ctx.fillStyle = color
     ctx.fillText(text, x, y)
 }
-
 
 // fetch assets
 const assets = new Map()
@@ -40,15 +51,22 @@ const assets = new Map()
 document.querySelectorAll("[data-asset]")
     .forEach(asset => assets.set(asset.getAttribute("data-asset"), asset))
 
-// creating our gameObjects from the fetched assets
+// creating our gameObjects
 const bird = new Bird(assets.get("bird"))
-const background = new GameObject(assets.get("background"))
-const ground = new GameObject(assets.get("ground"))
+const background = new ParallaxBackground(assets.get("background"))
+const ground = new ParallaxBackground(assets.get("ground"))
+
+ground.scrollSpeed = -60
+ground.loopingPoint = 288
+
+background.scrollSpeed = -20
+background.loopingPoint = 288
+
 const pipeManager = new PipeManager()
 
 // setting up starting position
 ground.position.addPosition(0, 400)
-bird.position.addPosition(128, 240)
+bird.position = new Vector2(128, 195)
 
 // running start on the PipeManager to create one pipe directly so we do no have to wait
 pipeManager.start()
@@ -62,7 +80,10 @@ const states = {
 }
 
 // set starting state
-let state = states.running
+let state = states.start
+
+// the user score
+let score = 0
 
 function animate(unscaledTime = 0) {
 
@@ -78,25 +99,30 @@ function animate(unscaledTime = 0) {
     // deltaTime is added to elapsed time so far
     time.elapsedTime += time.deltaTime
 
-    // draw
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    background.draw()
-    pipeManager.draw()
-    bird.update()
+    // update --------------------------------------------------------------
     if (state === states.running) {
+        // update
+        bird.update()
+        pipeManager.update()
+        ground.update()
+        background.update()
 
         function gameover() {
             bird.velocity.y = -1.5
             bird.dead = true
             state = states.score
         }
-
-        // update
-        pipeManager.update()
-
-        // check collision on every pipe pair with the bird
+        
         pipeManager.pipes.forEach(pipePair => {
+
+            // add score for every pipepair passed
+            if (!pipePair.scored && pipePair.pipeTop.position.x + pipePair.pipeTop.sprite.width < bird.position.x) {
+                pipePair.scored = true
+                score += 1
+            }
+
+            // check collision on every pipe pair with the bird
             if (bird.collides(pipePair.pipeTop) || bird.collides(pipePair.pipeBottom)) {
                 gameover() 
             } 
@@ -107,42 +133,68 @@ function animate(unscaledTime = 0) {
 
         // if the bird goes offscreen
         if (bird.position.y < 0) gameover() 
-
-        strokedAndFilledText("0", canvas.width / 2, 60)
-    }
-
-    if (state === states.countdown) {
-        // reset everything
-
-        // countdown
-
-        // move to running
     }
 
     if (state === states.score) {
-        
-        
+        bird.update()
         // play death sound
-        // make birdy drop
-        // show score
-        strokedAndFilledText("Tap", canvas.width / 2, 60)
-        
+
+        if(input.getMouseButtonClick(0)) {
+            setTimeout(() => state = states.start, 0) // to go to the new frame
+            
+         }
         
     }
 
 
     if (state === states.start) {
-        // show start screen
+        //click left mouse button to start
+        if(input.getMouseButtonClick(0)) {
+            bird.position = new Vector2(128, 195)
+            bird.dead = false
+
+            // du håller på att resta fålegn och dylikt
+            state = states.running
+            bird.velocity.y += bird.jumpForce
+        }
     }
 
-   
+    // draw -----------------------------------------------------------------
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    background.draw()
+    pipeManager.draw()
+    
+    if (state === states.start) {
+        // logo text
+        ctx.drawImage(assets.get("javascript-logo"), 180, 120)
+        strokedAndFilledText("Flappy", 150, 120)
+        strokedAndFilledText("Clone", 150, 167)
 
- 
+        // If we should "tap" or "click" sprite
+        const pointingIcon = (window.matchMedia("(any-hover: none)").matches) ? assets.get("pointing-hand"): assets.get("pointing-mouse") 
+        ctx.drawImage(pointingIcon, 110, 240)
+    }
+
+    if (state === states.running) {
+        strokedAndFilledText(`${score}`, 150, 60)
+    }
+
+    if (state === states.score) {
+        ctx.save()
+        ctx.shadowColor = "rgba(0,0,0,0.4)"
+        ctx.shadowBlur = 10
+        ctx.drawImage(assets.get("frame"),34,120)
+        
+        ctx.restore()
+        strokedAndFilledText(`${score}`, 150, 200)
+    }
+
     ground.draw()
     bird.draw()
- 
-    // reset
+
+    // reset inputs
     input.resetKeyPressedEvents()
+    input.resetMouseClickEvents()
     
     requestAnimationFrame(animate)
 }

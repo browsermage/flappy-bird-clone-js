@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird</title>
+    <title>Flappy Clone</title>
     <script type="importmap">
         {
           "imports": {
@@ -16,7 +16,11 @@
 <body>
     <!-- Assets -->
     <style>
-
+        body, html {
+            margin: 0;
+            background-color: #222034;
+            width: 100%;
+        }
         @font-face {
             font-family: "Retro";
             src: url("./assets/fonts/retro.woff2") format("woff2");
@@ -26,8 +30,21 @@
         *[data-asset] {
             display: none;
         }
+        #game-wrapper {
+            /* aspect-ratio: 9 / 16; */
+            max-height: 100vh;
+            margin: 0 auto; /* no judging, it is what it is */
+            
+        }
+        canvas {
+            width: 100%;
+        }
     </style>
     
+    <img data-asset="javascript-logo" src="./assets/images/JavaScript-logo.png">
+
+    <img data-asset="pointing-hand" src="./assets/images/pointing-hand.png">
+    <img data-asset="pointing-mouse" src="./assets/images/pointing-mouse.png">
     <img data-asset="bird" src="./assets/images/bird.png">
     <img data-asset="bird-flap" src="./assets/images/bird-flap.png">
     <img data-asset="bird-hurt" src="./assets/images/bird-hurt.png">
@@ -35,6 +52,7 @@
     <img data-asset="pipe-bottom" src="./assets/images/pipe-bottom.png">
     <img data-asset="background" src="./assets/images/background-day.png">
     <img data-asset="ground" src="./assets/images/ground.png">
+    <img data-asset="frame" src="./assets/images/frame.png">
 
     <audio data-asset="hit" src="./assets/sounds/hit.wav"></audio>
     <audio data-asset="point" src="./assets/sounds/point.wav"></audio>
@@ -43,23 +61,27 @@
 
     <div id="game-wrapper"></div>
     <p>
-        <ol>
-            <li><s>add sprites in flap and death state</s></li>
-            <li>add collision boxes that are smaller then the sprites</li>
-            <li>paralax background</li>
-            <li>sounds + music</li>
-            <li>score when passing pipes</li>
-            <li>Tap to start icon?</li>
-            <li>fix jitter</li>
-            <li>text and certain things are blurry</li>
-            <li>add resize capabilities</li>
-            <li>add tap + click + F</li>
-            <li>add background</li>
+        <ol style="color:white">
+            <li><s >add sprites in flap and death state</s></li>
+            <li><s>add collision boxes that are smaller then the sprites</s></li>
+            <li><s>parallax background</s></li>
+            <li><s>score when passing pipes</s></li>
+            <li><s>Tap to start icon?</s></li>
+            <li><s>fix jitter</s></li>
+            <li><s>text and certain things are blurry</s></li>
+            <li><s>add resize capabilities</s></li>
+            <li><s>add tap + click</s></li>
             <li>localstorage highscore?</li>
+            <li>sounds + music</li>
+            <li>Game Over screen</li>
+            <li>add UI? use HTML??</li>
+            <li>add mute sound option</li>
             <li>add github and Twitter icons</li>
+            <li>Add logo and sound start</li>
             <li>add readme</li>
             <li>upload to vercel</li>
             <li>add to codepen?</li>
+            <li>add icon to Assets</li>
             <li>ask feedback on the discord web dev</li>
         </ol>
     </p>

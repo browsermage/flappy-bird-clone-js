@@ -5,17 +5,22 @@ import { time } from "@scripts/time.js"
 import { assets } from "@core"
 
 export class Bird extends GameObject {
-    jumpForce = -1.5
+    jumpForce = -1.7
     velocity = new Vector2(0,0)
+    collider = {
+        width: 22,
+        height: 20,
+        offset: new Vector2(6,6)
+    }
     dead = false
 
     update() {
 
-        if (input.getKeyPressed("KeyF") && !this.dead) {
+        if (input.getKeyPressed("KeyF") || input.getMouseButtonClick(0) && !this.dead) {
             this.velocity.y = this.jumpForce
         } 
 
-        const gravity = 3
+        const gravity = 4
 
         this.velocity.y = this.velocity.y + gravity * time.deltaTime
         this.position.addPosition(this.velocity.x, this.velocity.y)
@@ -29,9 +34,9 @@ export class Bird extends GameObject {
 
     // Axis-aligned bounding box testing (AABB collision test)
     collides(pipe) {
-        return pipe.position.x < this.position.x + this.sprite.width &&
-        pipe.position.x + pipe.sprite.width > this.position.x &&
-        pipe.position.y < this.position.y + this.sprite.height &&
-        pipe.sprite.height + pipe.position.y > this.position.y
+        return pipe.position.x < (this.position.x + this.collider.offset.x) + this.collider.width &&
+        pipe.position.x + pipe.sprite.width > (this.position.x + this.collider.offset.x) &&
+        pipe.position.y < (this.position.y + this.collider.offset.y) + this.collider.height &&
+        pipe.sprite.height + pipe.position.y > (this.position.y + this.collider.offset.y)
     }
 }

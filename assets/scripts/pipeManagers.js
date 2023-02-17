@@ -8,6 +8,7 @@ export class PipeManager {
     pipes = []
     moveSpeed = 60
     spawnTimer = 0
+    score = false
 
     start() {
         this.createPipe()
