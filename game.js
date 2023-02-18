@@ -11,28 +11,45 @@ const gameWrapper = document.querySelector("#game-wrapper")
 
 gameWrapper.appendChild(canvas)
 
-function resize() {
-    const dpr = window.devicePixelRatio
+const dpr = window.devicePixelRatio
 
-    canvas.style.width = "288px"
-    canvas.style.height = "512px"
+canvas.style.width = "288px"
+canvas.style.height = "512px"
 
-    canvas.width = 288 * dpr
-    canvas.height = 512 * dpr
+canvas.width = 288 * dpr
+canvas.height = 512 * dpr
+
+ctx.scale(dpr,dpr)
+
+canvas.style.imageRendering = "pixelated"
+ctx.imageSmoothingEnabled = false
+
+// set text 
+ctx.font = "28px Retro"
+ctx.textAlign = "center"
+
+// function resize() {
+//     const dpr = window.devicePixelRatio
+
+//     canvas.style.width = "288px"
+//     canvas.style.height = "512px"
+
+//     canvas.width = 288 * dpr
+//     canvas.height = 512 * dpr
     
-    ctx.scale(dpr,dpr)
+//     ctx.scale(dpr,dpr)
 
-    canvas.style.imageRendering = "pixelated"
-    ctx.imageSmoothingEnabled = false
+//     canvas.style.imageRendering = "pixelated"
+//     ctx.imageSmoothingEnabled = false
 
-    // set text 
-    ctx.font = "28px Retro"
-    ctx.textAlign = "center"
-}
+//     // set text 
+//     ctx.font = "28px Retro"
+//     ctx.textAlign = "center"
+// }
 
-resize()
+// resize()
 
-window.addEventListener("resize", resize, false)
+// window.addEventListener("resize", resize, false)
 
 function strokedAndFilledText(text = "", x = 0, y = 0, color = "white") {
     ctx.strokeText(text, x, y + 4)
