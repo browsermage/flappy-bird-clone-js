@@ -13,7 +13,7 @@ I like combining the web stack and game development, if you like what you see pl
 <!-- ABOUT -->
 ## About The Project
 
-mama
+This is just me trying to get back in to making games. Hope you get some use of the code
 
 <!-- PREREQUISITES -->
 ## Prerequisites
