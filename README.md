@@ -7,7 +7,7 @@ I like combining the web stack and game development, if you like what you see pl
 <a href="https://github.com/colorsofcode/flappy-bird-clone-js/issues">Report Bug 🐛</a>
 
 <div align="center">
-   <img src="./art/gameplay.gif" width="426" height="753">
+   <img src="./art/gameplay.gif" width="282" height="555">
 </div>
 
 <!-- ABOUT -->
