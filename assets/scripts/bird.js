@@ -39,4 +39,10 @@ export class Bird extends GameObject {
         pipe.position.y < (this.position.y + this.collider.offset.y) + this.collider.height &&
         pipe.sprite.height + pipe.position.y > (this.position.y + this.collider.offset.y)
     }
+
+    reset() {
+        this.velocity = new Vector2(0,0)
+        this.dead = false
+    }
+    
 }

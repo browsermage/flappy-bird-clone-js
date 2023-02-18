@@ -57,4 +57,9 @@ export class PipeManager {
             pipeBottom
         })
     }
+    
+    reset() {
+        this.pipes = []
+        this.spawnTimer = 0
+    }
 }

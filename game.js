@@ -66,10 +66,6 @@ const pipeManager = new PipeManager()
 
 // setting up starting position
 ground.position.addPosition(0, 400)
-bird.position = new Vector2(128, 195)
-
-// running start on the PipeManager to create one pipe directly so we do no have to wait
-pipeManager.start()
 
 // define the games states
 const states = {
@@ -101,6 +97,32 @@ function animate(unscaledTime = 0) {
 
 
     // update --------------------------------------------------------------
+
+    // start ----------------------------
+    if (state === states.start) {
+        
+        // reset the game score
+        score = 0
+
+        // reset and running start on the PipeManager to create one pipe directly so we do no have to wait
+        pipeManager.reset()
+        pipeManager.start()
+
+        // reset the bird to initstate
+        bird.reset()
+        bird.position = new Vector2(128, 195)
+        bird.sprite = assets.get("bird")
+        
+        //click left mouse button to start
+        if(input.getMouseButtonClick(0)) {
+            // du håller på att resta fålegn och dylikt
+            state = states.running
+            bird.velocity.y += bird.jumpForce
+        }
+    }
+
+
+    // running ----------------------------
     if (state === states.running) {
         // update
         bird.update()
@@ -135,6 +157,7 @@ function animate(unscaledTime = 0) {
         if (bird.position.y < 0) gameover() 
     }
 
+    // score ----------------------------
     if (state === states.score) {
         bird.update()
         // play death sound
@@ -144,19 +167,6 @@ function animate(unscaledTime = 0) {
             
          }
         
-    }
-
-
-    if (state === states.start) {
-        //click left mouse button to start
-        if(input.getMouseButtonClick(0)) {
-            bird.position = new Vector2(128, 195)
-            bird.dead = false
-
-            // du håller på att resta fålegn och dylikt
-            state = states.running
-            bird.velocity.y += bird.jumpForce
-        }
     }
 
     // draw -----------------------------------------------------------------
@@ -180,12 +190,7 @@ function animate(unscaledTime = 0) {
     }
 
     if (state === states.score) {
-        ctx.save()
-        ctx.shadowColor = "rgba(0,0,0,0.4)"
-        ctx.shadowBlur = 10
         ctx.drawImage(assets.get("frame"),34,120)
-        
-        ctx.restore()
         strokedAndFilledText(`${score}`, 150, 200)
     }
 
