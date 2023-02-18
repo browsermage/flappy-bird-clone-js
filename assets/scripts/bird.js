@@ -18,6 +18,7 @@ export class Bird extends GameObject {
 
         if (input.getKeyPressed("KeyF") || input.getMouseButtonClick(0) && !this.dead) {
             this.velocity.y = this.jumpForce
+            assets.get("wing").play()
         } 
 
         const gravity = 4

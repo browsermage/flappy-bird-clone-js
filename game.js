@@ -28,29 +28,6 @@ ctx.imageSmoothingEnabled = false
 ctx.font = "28px Retro"
 ctx.textAlign = "center"
 
-// function resize() {
-//     const dpr = window.devicePixelRatio
-
-//     canvas.style.width = "288px"
-//     canvas.style.height = "512px"
-
-//     canvas.width = 288 * dpr
-//     canvas.height = 512 * dpr
-    
-//     ctx.scale(dpr,dpr)
-
-//     canvas.style.imageRendering = "pixelated"
-//     ctx.imageSmoothingEnabled = false
-
-//     // set text 
-//     ctx.font = "28px Retro"
-//     ctx.textAlign = "center"
-// }
-
-// resize()
-
-// window.addEventListener("resize", resize, false)
-
 function strokedAndFilledText(text = "", x = 0, y = 0, color = "white") {
     ctx.strokeText(text, x, y + 4)
     ctx.lineWidth = 6
@@ -71,13 +48,17 @@ document.querySelectorAll("[data-asset]")
 // creating our gameObjects
 const bird = new Bird(assets.get("bird"))
 const background = new ParallaxBackground(assets.get("background"))
+const clouds = new ParallaxBackground(assets.get("clouds"))
 const ground = new ParallaxBackground(assets.get("ground"))
 
 ground.scrollSpeed = -60
 ground.loopingPoint = 288
 
-background.scrollSpeed = -20
+background.scrollSpeed = -46
 background.loopingPoint = 288
+
+clouds.scrollSpeed = -40
+clouds.loopingPoint = 288
 
 const pipeManager = new PipeManager()
 
@@ -135,6 +116,7 @@ function animate(unscaledTime = 0) {
             // du håller på att resta fålegn och dylikt
             state = states.running
             bird.velocity.y += bird.jumpForce
+            assets.get("retrosynth").play()
         }
     }
 
@@ -146,8 +128,11 @@ function animate(unscaledTime = 0) {
         pipeManager.update()
         ground.update()
         background.update()
+        clouds.update()
 
         function gameover() {
+            assets.get("hit").play()
+            assets.get("die").play()
             bird.velocity.y = -1.5
             bird.dead = true
             state = states.score
@@ -159,6 +144,7 @@ function animate(unscaledTime = 0) {
             if (!pipePair.scored && pipePair.pipeTop.position.x + pipePair.pipeTop.sprite.width < bird.position.x) {
                 pipePair.scored = true
                 score += 1
+                assets.get("point").play()
             }
 
             // check collision on every pipe pair with the bird
@@ -188,6 +174,7 @@ function animate(unscaledTime = 0) {
 
     // draw -----------------------------------------------------------------
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    clouds.draw()
     background.draw()
     pipeManager.draw()
     

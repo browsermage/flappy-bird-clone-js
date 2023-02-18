@@ -46,11 +46,15 @@ Björn Hjorth - [@colorsofcode](https://twitter.com/colorsofcode)
 ## License
 
 The code is distributed under the MIT License. See `LICENSE` for more information.
+
 Some (almost all 😅) of the pixel art is made by GrafxKid, please refer to his license on itch.io for the pixel art.
+
 Also the font is from FFF, please read accompanied license in the font folder
 
 <!-- ACKKNOWLEDGE -->
 ## Acknowledgments
+
+Soundtrack made by my son for Pizza 🍕🍕
 
 [GrafxKid](https://grafxkid.itch.io/) - Pixel art
 
