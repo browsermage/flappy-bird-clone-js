@@ -1,13 +1,13 @@
-Hi there, I'm Björn Hjorth 👋
+👋 Hi there, I'm Björn Hjorth
 
-I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter @colorsofcode
+I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter [@colorsofcode](https://twitter.com/colorsofcode)
 
 <a href="#">Try live demo 🕹️</a>
 ·
 <a href="https://github.com/colorsofcode/flappy-bird-clone-js/issues">Report Bug 🐛</a>
 
 <div align="center">
-   <img src="./art/pong-playing.gif" width="640" height="360">
+   <img src="./art/gameplay.gif" width="640" height="360">
 </div>
 
 <!-- ABOUT -->
@@ -17,6 +17,7 @@ mama
 
 <!-- PREREQUISITES -->
 ## Prerequisites
+You can use any webserver of you liking, but here is a guide using `http-server`
 
 * Node
 * Npm
@@ -45,9 +46,9 @@ Björn Hjorth - [@colorsofcode](https://twitter.com/colorsofcode)
 ## License
 
 The code is distributed under the MIT License. See `LICENSE` for more information.
-The pixel art spritesheet is distributed under the 
+Some (almost all 😅) of the pixel art is made by GrafxKid, please refer to his license on itch.io for the pixel art. 
 
 <!-- ACKKNOWLEDGE -->
 ## Acknowledgments
 
-[@WoostarsPixels](https://twitter.com/WoostarsPixels)
+[GrafxKid](https://grafxkid.itch.io/)
