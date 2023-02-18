@@ -2,7 +2,7 @@
 
 I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter [@colorsofcode](https://twitter.com/colorsofcode)
 
-<a href="#">Try live demo 🕹️</a>
+<a href="https://flappy-bird-clone-js.vercel.app/">Try live demo 🕹️</a>
 ·
 <a href="https://github.com/colorsofcode/flappy-bird-clone-js/issues">Report Bug 🐛</a>
 
