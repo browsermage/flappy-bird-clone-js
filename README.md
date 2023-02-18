@@ -51,4 +51,5 @@ Some (almost all 😅) of the pixel art is made by GrafxKid, please refer to his
 <!-- ACKKNOWLEDGE -->
 ## Acknowledgments
 
-[GrafxKid](https://grafxkid.itch.io/)
+[GrafxKid](https://grafxkid.itch.io/) - Pixel art
+[FFF - Fonts for Flash](https://www.1001fonts.com/users/fontsforflash/) - Retro font
