@@ -4,7 +4,7 @@ I like combining the web stack and game development, if you like what you see pl
 
 <a href="https://flappy-bird-clone-js.vercel.app/">Try live demo 🕹️</a>
 ·
-<a href="https://github.com/colorsofcode/flappy-bird-clone-js/issues">Report Bug 🐛</a>
+<a href="https://github.com/html2d/flappy-bird-clone-js/issues">Report Bug 🐛</a>
 
 <div align="center">
    <img src="./art/gameplay.gif" width="282" height="555">
@@ -40,7 +40,7 @@ You can use any webserver of you liking, but here is a guide using `http-server`
 <!-- CONTACT -->
 ## Contact
 
-Björn Hjorth - [@colorsofcode](https://twitter.com/colorsofcode)
+Björn Hjorth - [@html2d_](https://twitter.com/html2d_)
 
 <!-- LICENSE -->
 ## License
