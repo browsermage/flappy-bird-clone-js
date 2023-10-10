@@ -1,10 +1,10 @@
 👋 Hi there, I'm Björn Hjorth
 
-I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter [@colorsofcode](https://twitter.com/colorsofcode)
+I like combining the web stack and game development, if you like what you see please do not be a stranger and say "Hi" on Twitter [@browsermage](https://twitter.com/browsermage)
 
 <a href="https://flappy-bird-clone-js.vercel.app/">Try live demo 🕹️</a>
 ·
-<a href="https://github.com/html2d/flappy-bird-clone-js/issues">Report Bug 🐛</a>
+<a href="https://github.com/browsermage/flappy-bird-clone-js/issues">Report Bug 🐛</a>
 
 <div align="center">
    <img src="./art/gameplay.gif" width="282" height="555">
@@ -27,7 +27,7 @@ You can use any webserver of you liking, but here is a guide using `http-server`
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/colorsofcode/flappy-bird-clone-js.git
+   git clone https://github.com/browsermage/flappy-bird-clone-js.git
    ```
 2. Move to the new directory
     ```sh
@@ -40,7 +40,7 @@ You can use any webserver of you liking, but here is a guide using `http-server`
 <!-- CONTACT -->
 ## Contact
 
-Björn Hjorth - [@html2d_](https://twitter.com/html2d_)
+Björn Hjorth - [@browsermage_](https://twitter.com/browsermage_)
 
 <!-- LICENSE -->
 ## License
